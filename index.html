@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="PokedexApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex V1.0</title>
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div ng-controller="MainController">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Pokedex V1.0</h1>
+                </div>
+                <div class="col-12">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search Pokemon..."
+                            aria-label="Search pokemon..." aria-describedby="button-search" autocomplete
+                            ng-model="searchPokemon">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <!-- Listado de Pokemones -->
+                <div class="col-12 col-md-6">
+                    <div ng-if="!loadingList">
+                        <table class="table">
+                            <tbody>
+                                <tr ng-repeat="pokemon in data | filter: searchPokemon.toLowerCase()">
+                                    <td ng-click="getDetails(pokemon.name)">{{pokemon.name}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item" ng-class="{ 'disabled': prevPageUrl === null }">
+                                    <a class="page-link" href="#" ng-click="prevPage()">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" ng-class="{ 'disabled': nextPageUrl === null }">
+                                    <a class="page-link" href="#" ng-click="nextPage()">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div ng-if="loadingList">
+                        <span class="placeholder col-12 my-2"></span>
+                        <span class="placeholder col-12 my-2"></span>
+                        <span class="placeholder col-12 my-2"></span>
+                        <span class="placeholder col-12 my-2"></span>
+                        <span class="placeholder col-12 my-2"></span>
+                    </div>
+                </div>
+
+                <!-- Detalle del pokemon -->
+                <div id="cont-details" class="col-12 col-md-6">
+                    <div class="card" ng-if="!loadingDetails && pokemonSelected.name !== undefine">
+                        <div class="card-body">
+                            <h5 class="card-title">{{pokemonSelected.name}}</h5>
+                            <div class="mb-3">
+                                <div>
+                                    Id: {{pokemonSelected.id}}
+                                </div>
+                                <div>
+                                    Height: {{pokemonSelected.height}}
+                                </div>
+                                <div>
+                                    Weight: {{pokemonSelected.weight}}
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="card-header">
+                                    Abilities
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li ng-repeat="item in pokemonSelected.abilities" class="list-group-item">
+                                        {{item.ability.name}}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mb-3">
+                                <div class="card-header">
+                                    moves
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li ng-repeat="item in pokemonSelected.moves" class="list-group-item">
+                                        {{item.move.name}}
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card" ng-if="!loadingDetails && pokemonSelected.name === undefined">
+                        <div class="card-body" ng-if="pokemonSelected.name === undefined">
+                            <h5 class="card-title text-center text-body-tertiary">Select a Pokemon</h5>
+                        </div>
+                    </div>
+
+                    <div class="card" aria-hidden="true" ng-if="loadingDetails">
+                        <div class="card-body">
+                          <h5 class="card-title placeholder-glow">
+                            <span class="placeholder col-6"></span>
+                          </h5>
+                          <p class="card-text placeholder-glow">
+                            <span class="placeholder col-7"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-6"></span>
+                            <span class="placeholder col-8"></span>
+                          </p>
+                        </div>
+                      </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="src/app.js"></script>
+</body>
+
+</html>
