@@ -2,9 +2,9 @@
   "name": "pokedex-prueba",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "serve": "http-server"
+    "start": "http-server"
   },
   "author": "",
   "license": "ISC",
