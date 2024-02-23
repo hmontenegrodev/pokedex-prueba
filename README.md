@@ -5,19 +5,30 @@ Pequeño buscador de pokemon para pruebas de consumo de API https://pokeapi.co d
 
 
 
-## Instalación
+## Instalar el proyecto correrlo en local
 
-Instalar el proyecto con NPM
-
-```bash
-  npm i
-```
-    
-## Deployment
-
-Para correr el proyecto, correr el comando
+Clonar el proyecto
 
 ```bash
-  npm run serve
+  git clone https://github.com/hmontenegrodev/pokedex-prueba.git
 ```
 
+Ir al directorio del proyecto
+
+```bash
+  cd pokedex-prueba
+```
+
+Instalar las dependencias
+
+```bash
+  npm install
+```
+
+Iniciar el servidor y correr el proyecto
+
+```bash
+  npm run start
+```
+
+Ingresar a http://localhost:8080/
